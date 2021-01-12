@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Extra functionality for WordPress Multisite for the Ryerson University Library WordPress site.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rylib-wpmu-extensions
- * Version: 0.0.1-alpha
+ * Version: 0.0.2-alpha
  */
 
 // Adds "Active Theme" column to sites listing
