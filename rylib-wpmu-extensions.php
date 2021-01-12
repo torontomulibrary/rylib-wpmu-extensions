@@ -19,10 +19,10 @@ function rylib_wpmu_blogs_columns($sites_columns)
   );
   return $sites_columns;
 }
-add_filter( 'wpmu_blogs_columns', 'rylib_wpmu_blogs_columns_active_theme' );
+add_filter( 'wpmu_blogs_columns', 'rylib_wpmu_blogs_columns' );
 
 // Hook to manage column data on network sites listing
-function rylib_wpmu_manage_sites_custom_column_active_theme( $column_name, $blog_id )
+function rylib_wpmu_manage_sites_custom_column( $column_name, $blog_id )
 {
   if ( $column_name == 'blog_id' ) {
     echo "{$blog_id}";
@@ -34,4 +34,4 @@ function rylib_wpmu_manage_sites_custom_column_active_theme( $column_name, $blog
     echo "{$theme->Name} ({$template_directory})";
   }
 }
-add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column_active_theme', 10, 2 );
+add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column', 10, 2 );
