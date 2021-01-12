@@ -24,7 +24,7 @@ function rylib_wpmu_manage_sites_custom_column_active_theme( $column_name, $blog
   if ( $column_name == 'template' ) {
     $template_directory = get_blog_option( $blog_id, 'template' );
     $theme = wp_get_theme( $template_directory );
-    echo $theme->Name;
+    echo "{$theme->Name} ({$template_directory})";
   }
 }
 add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column_active_theme', 10, 2 );
