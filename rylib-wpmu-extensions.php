@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Extra functionality for WordPress Multisite for the Ryerson University Library WordPress site.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rylib-wpmu-extensions
- * Version: 0.0.3-alpha
+ * Version: 0.0.4-alpha
  */
 
 // Adds custom columns to Sites list in Network Options
@@ -15,7 +15,7 @@ function rylib_wpmu_blogs_columns($sites_columns)
 {
   $sites_columns = $sites_columns + array( 
     'blog_id' => 'Site ID',
-    'template' => 'Active Theme' 
+    'stylesheet' => 'Active Theme' 
   );
   return $sites_columns;
 }
@@ -28,10 +28,10 @@ function rylib_wpmu_manage_sites_custom_column( $column_name, $blog_id )
     echo "{$blog_id}";
   }
 
-  if ( $column_name == 'template' ) {
-    $template_directory = get_blog_option( $blog_id, 'template' );
-    $theme = wp_get_theme( $template_directory );
-    echo "{$theme->Name} ({$template_directory})";
+  if ( $column_name == 'stylesheet' ) {
+    $stylesheet_directory = get_blog_option( $blog_id, 'stylesheet' );
+    $theme = wp_get_theme( $stylesheet_directory );
+    echo "{$theme->Name} ({$stylesheet_directory})";
   }
 }
 add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column', 10, 2 );
