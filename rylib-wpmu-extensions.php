@@ -40,6 +40,6 @@ add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column
 add_action('admin_footer', 'rylib_wpmu_admin_theme_style');
 function rylib_wpmu_admin_theme_style() {
 	if (!current_user_can( 'manage_network' )) {
-		echo '<style>div.fs-notice.updated, div.fs-notice.success, div.fs-notice.promotion { display: none; }</style>';
+		echo '<style>div.fs-notice.updated, div.fs-notice.success, div.fs-notice.promotion { display: none!important; }</style>';
 	}
 }
