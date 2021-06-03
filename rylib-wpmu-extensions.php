@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/ryersonlibrary
  * Description: Extra functionality for WordPress Multisite for the Ryerson University Library WordPress site.
  * GitHub Plugin URI: https://github.com/ryersonlibrary/rylib-wpmu-extensions
- * Version: 0.0.4-alpha
+ * Version: 0.0.5-alpha
  */
 
 // Adds custom columns to Sites list in Network Options
@@ -35,3 +35,12 @@ function rylib_wpmu_manage_sites_custom_column( $column_name, $blog_id )
   }
 }
 add_action( 'manage_sites_custom_column', 'rylib_wpmu_manage_sites_custom_column', 10, 2 );
+
+// Suppress Freemius Notifications for non Super-Admin users
+add_action('admin_enqueue_scripts', 'rylib_wpmu_admin_theme_style');
+add_action('login_enqueue_scripts', 'rylib_wpmu_admin_theme_style');
+function rylib_wpmu_admin_theme_style() {
+	if (!current_user_can( 'manage_network' )) {
+		echo '<style>.fs-notice { display: none; }</style>';
+	}
+}
