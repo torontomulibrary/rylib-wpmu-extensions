@@ -7,7 +7,7 @@ defined( 'ABSPATH' ) OR exit;
  * Author URI: https://github.com/torontomulibrary
  * Description: Extra functionality for WordPress Multisite
  * GitHub Plugin URI: https://github.com/torontomulibrary/rylib-wpmu-extensions
- * Version: 0.0.7-alpha
+ * Version: 0.0.8-alpha
  */
 
 // include wordpress settings and helpers
@@ -55,8 +55,10 @@ function rylib_wpmu_admin_theme_style() {
 
 // Redirect Lost Password page to custom URL
 function rylib_wpmu_lostpassword_url() {
-  $tmu_wpmu_options = get_option('tmu_wpmu_options');
-  $redirect_url = isset($tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url']) ? $tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url'] : '';
+  $redirect_url = get_site_option('tmu_wpmu_forgot_password_redirect');
+  // $redirect_url = "http://localhost:8080";
+  // $tmu_wpmu_options = get_option('tmu_wpmu_options');
+  // $redirect_url = isset($tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url']) ? $tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url'] : '';
 
   if (isset($redirect_url) && !empty($redirect_url)) {
     // Redirect to custom URL
@@ -67,5 +69,4 @@ function rylib_wpmu_lostpassword_url() {
   }
 }
 add_action( 'login_form_lostpassword', 'rylib_wpmu_lostpassword_url' );
-$tmu_wpmu_options = get_option('tmu_wpmu_options');
 
