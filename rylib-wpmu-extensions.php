@@ -48,3 +48,16 @@ function rylib_wpmu_admin_theme_style() {
 		echo '<style>div.fs-notice.updated, div.fs-notice.success, div.fs-notice.promotion { display: none!important; }</style>';
 	}
 }
+
+// Redirect Lost Password page to custom URL
+  function rylib_wpmu_lostpassword_url() {
+  // Define your custom URL
+  $custom_url = 'https://yourwebsite.com/custom-forgot-password/';
+
+  // Redirect to custom URL
+  if (isset($_GET['action']) && $_GET['action'] === 'lostpassword') {
+      wp_redirect($custom_url);
+      exit();
+  }
+}
+add_action( 'login_form_lostpassword', 'rylib_wpmu_lostpassword_url' );
