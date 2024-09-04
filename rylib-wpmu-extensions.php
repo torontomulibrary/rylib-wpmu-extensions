@@ -1,14 +1,18 @@
 <?php
 defined( 'ABSPATH' ) OR exit;
 /*
- * Plugin Name: Ryerson University Library WordPress Multisite Extensions
- * Plugin URI: https://github.com/ryersonlibrary/rylib-wpmu-extensions
- * Author: Ryerson University Library
- * Author URI: https://github.com/ryersonlibrary
- * Description: Extra functionality for WordPress Multisite for the Ryerson University Library WordPress site.
- * GitHub Plugin URI: https://github.com/ryersonlibrary/rylib-wpmu-extensions
- * Version: 0.0.6-alpha
+ * Plugin Name: TMU Libraries WordPress Multisite Extensions
+ * Plugin URI: https://github.com/torontomulibrary/rylib-wpmu-extensions
+ * Author: TMU Libraries
+ * Author URI: https://github.com/torontomulibrary
+ * Description: Extra functionality for WordPress Multisite
+ * GitHub Plugin URI: https://github.com/torontomulibrary/rylib-wpmu-extensions
+ * Version: 0.0.7-alpha
  */
+
+// include wordpress settings and helpers
+include plugin_dir_path(__FILE__) . 'settings.php';
+include plugin_dir_path(__FILE__) . 'helpers.php';
 
 // Adds custom columns to Sites list in Network Options
 function rylib_wpmu_blogs_columns($sites_columns)
@@ -50,14 +54,18 @@ function rylib_wpmu_admin_theme_style() {
 }
 
 // Redirect Lost Password page to custom URL
-  function rylib_wpmu_lostpassword_url() {
-  // Define your custom URL
-  $custom_url = 'https://yourwebsite.com/custom-forgot-password/';
+function rylib_wpmu_lostpassword_url() {
+  $tmu_wpmu_options = get_option('tmu_wpmu_options');
+  $redirect_url = isset($tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url']) ? $tmu_wpmu_options['tmu_wpmu_forgot_password_redirect_url'] : '';
 
-  // Redirect to custom URL
-  if (isset($_GET['action']) && $_GET['action'] === 'lostpassword') {
-      wp_redirect($custom_url);
-      exit();
+  if (isset($redirect_url) && !empty($redirect_url)) {
+    // Redirect to custom URL
+    if (isset($_GET['action']) && $_GET['action'] === 'lostpassword') {
+        wp_redirect($redirect_url);
+        exit();
+    }
   }
 }
 add_action( 'login_form_lostpassword', 'rylib_wpmu_lostpassword_url' );
+$tmu_wpmu_options = get_option('tmu_wpmu_options');
+
